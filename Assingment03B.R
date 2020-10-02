@@ -1,26 +1,18 @@
-# Load data file
 load("prrace08.rda")
+j_obama <- 0
+j_mccain <- 0
 
-# Define Obama and McCain
-Obama <- 0
-McCain <- 0
-
-# Number of rows in prrace08
-n <- length(prrace08$state)
-
-# Awarding electoral votes
-for (i in 1:n) {
-  if(prrace08$p_obama[i] > prrace08$p_mc_cain[i]){
-    Obama <- Obama + prrace08el-votes[i]
+for (i in 1:51) {
+  if (prrace08$p_obama[i]>=prrace08$p_mc_cain[i]) {
+    j_obama<- j_obama + prrace08$el_votes[i]
   } else {
-    McCain <- McCain + prrace08$el_votes[i]
+    j_mc_cain<- j_mccain + prrace08$el_votes[i]
   }
 }
+j_obama<-j_obama+1
+j_mc_cain<-j_mc_cain-1
 
-# Nebraska electoral split
-Obama <- Obama + 1
-McCain <- McCain - 1
+cat('Obama got', j_obama, 'votes', "\n") 
+cat('McCain got', j_mccain, 'votes')
 
-# Print results
-cat("Obama",Obama,"\nMcCain:",McCain)
 
